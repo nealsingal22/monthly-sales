@@ -1,5 +1,6 @@
 # reporter.py
-
+import pandas
+import os
 def to_usd(my_price):
     """
     Converts a numeric value to usd-formatted string, for printing and display purposes.
@@ -9,5 +10,20 @@ def to_usd(my_price):
     Returns: $4,000.44
     """
     return f"${my_price:,.2f}" #> $12,000.71
+print("READING GRADEBOOK CSV FILE...")
+# if CSV file in same dir as this Python script:
+#USE OS JOIN FOR FULL POINTS ON PROJECTS
+csv_filepath = os.path.join(os.path.dirname(__file__), "data", "gradebook.csv") 
+grades = pandas.read_csv(csv_filepath)
+print("GRADES:", type(grades))
+#print(dir(grades))
+print(grades.tail())
+# grades["student_id"]
+# grades["final_grade"]
 
-print("GENERATING SALES REPORT FOR MONTH OF OCTOBER 2013...")
+# FIND AVG GRADE
+# stats["games"].max()
+grades_col = grades["final_grade"]
+print("GRADES COLUMN", type(grades_col))
+avg_grade = grades_col.mean()
+print("AVG GRADE:", avg_grade)
